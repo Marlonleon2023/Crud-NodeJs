@@ -1,0 +1,163 @@
+<%- include("partials/header") %>
+
+
+<div class="container mt-5">
+  <!-- Fila para el formulario -->
+  <div class="row">
+    <h2>Ingreso Datos</h2>
+    <div class="col-md-12"> <!-- Usamos col-md-12 para que el formulario ocupe toda la fila -->
+      <form action="/add" method="POST">
+        <input type="text" name="name" placeholder="Name" class="form-control mb-2" autofocus />
+        <input type="text" name="address" placeholder="Address" class="form-control mb-2" />
+        <input type="text" name="phone" placeholder="Phone" class="form-control mb-2" />
+        <button type="submit" class="btn btn-info">Save Customer</button>
+      </form>
+    </div>
+  </div>  
+
+
+  <!-- Fila para la tabla de clientes -->
+  <div class="row mt-4"> <!-- mt-4 agrega un margen superior para separar un poco el formulario de la tabla -->
+    <div class="col-md-12"> <!-- Coloca la tabla de clientes en una fila completa -->
+      <h2>Lista de Clientes</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Actions</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.forEach(function(customer) { %>
+            <tr>
+              <td><%= customer.name %></td>
+              <td><%= customer.address %></td>
+              <td><%= customer.phone %></td>
+              <td>
+                <a href="/delete/<%= customer.id %>" class="btn btn-danger">Delete</a>
+              </td>
+              <td class="d-flex gap-2">
+                <a href="/update/<%= customer.id %>" class="btn btn-success">Actualizar</a>
+              </td>  
+
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") %>
+
+
+
+<style>
+    /* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+
+/* Estilos para el formulario */
+form {
+  background-color: #fefcfc;
+  padding: 40px;
+  border-radius: 8px;
+}
+
+form input[type="text"] {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 10px;
+
+  width: 100%;
+}
+
+form button {
+  background-color: #17a2b8;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+form button:hover {
+  background-color: #138496;
+}
+
+
+
+/* Estilos para la tabla de clientes */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Estilos para los botones de acciones */
+.btn {
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+/* Espaciado entre el formulario y la tabla */
+.mt-4 {
+  margin-top: 30px;
+}
+
+/* Estilos para el título de la lista de clientes */
+h2 {
+  font-size: 24px;
+  color: #343a40;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+</style>
